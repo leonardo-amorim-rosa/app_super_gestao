@@ -1,3 +1,22 @@
+## Trabalhando com Rotas
+## Trabalhando com Controllers
+## Blade
+
+## Trabalhando com banco de dados (Eloquent ORM)
+- Uso do tinker para executar os comandos e consultas na base de dados [php artisan tinker]
+- Para criar registros basta instaciar o modelo, popular o objeto e chamar o [save], ou utilizar o método estático [create], 
+  sendo no ultimo, necessário declarar os campos na variável [fillable] dentro do modelo.
+- Método de consulta por id [find], podendo passar um id ou um range. Ex: Pessoa::find(1), Pessoa::find([1,3,6])
+- Mais métodos de consulta [where] [whereIn] [whereNotIn] [whereBetween] [whereNotBetween] [whereDate] [whereTime] [where(Day,Mounth,Year)]
+- Sintaxe do [where] ->where('<campo>', '<operador>', '<valor>'), sendo o operador ser um dos listados a seguir: >, <>, <=, >=, ==
+- Para listar todos os registros de uma tabela, utilizar o método estático [all]. Ex: Pessoa::all()
+- Para ordenar uma lista de resultados, utilizar o comando [orderBy]. Ex: Pessoa::orderBy('nome', 'desc')
+- Para separar instruções de consulta em blocos, utilizar funções de callback. Ex: Pessoa:where('nome', 'Leo')->where(function    ($query) { <instruções normais>; }).osWhere(function ($query) { <instrções>; }) e assim por diante, colocando em cada função  instruções normais de consulta.  
+- Para comparar o valor de uma coluna com outra, usar [whereCollumn]. Ex: Pessoa::whereCollumn('nome', 'username')
+- Collections - retorna de consultas, é possível manipular com alguns métodos, tipos: [first,last,reverse,toArray,toJson,pluck]
+- Collection [pluck] retorna campos específicos de um resultado. Ex: Pessoa::all()->pluck('nome') - retornará uma lista só com os nomes das pessoas.
+- Existem muitos métodos úteis na classe Collection, consultar documentação para sabe mais, guia <Digging Deeper - Collections>
+
 ## Trabalhando com migrations
 - [Criar migração] php artisan make:migration **nome_da_migracao**
 - [Efetuar migração] php artisan migrate
