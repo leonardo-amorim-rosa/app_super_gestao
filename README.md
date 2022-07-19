@@ -16,6 +16,8 @@
 - Collections - retorna de consultas, é possível manipular com alguns métodos, tipos: [first,last,reverse,toArray,toJson,pluck]
 - Collection [pluck] retorna campos específicos de um resultado. Ex: Pessoa::all()->pluck('nome') - retornará uma lista só com os nomes das pessoas.
 - Existem muitos métodos úteis na classe Collection, consultar documentação para sabe mais, guia <Digging Deeper - Collections>
+- Para editar e atualizar registros, podemos utilizar o método <save> de uma instância ou o método <fill> e <update>. Ex: Pessoa::fill('nome', 'nome editado')->update()
+- Para excluir registros, podemos usar o método <delete> de uma instância ou o método <destroy> da classe. Ex: Pessoa::destroy(1)
 
 ## Trabalhando com migrations
 - [Criar migração] php artisan make:migration **nome_da_migracao**
@@ -23,7 +25,7 @@
 - [Desfazer a migração anterior] php artisan migrate:rollback
 - [Desfazer mais de uma migração] php artisan migrate:rollback --steps=1
 
-# Comandos Status, Reset, Refresh e Fresh
+### Comandos Status, Reset, Refresh e Fresh
 - [Status] exibe todas as migrações e informa se foram executadas ou não
 - [Reset] efetua rollback em todas as migrações, voltando ao estado original
 - [Refresh] efetua rollback em todas as migrações e depois executa migrate para criar novamente
