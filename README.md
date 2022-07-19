@@ -16,8 +16,12 @@
 - Collections - retorna de consultas, é possível manipular com alguns métodos, tipos: [first,last,reverse,toArray,toJson,pluck]
 - Collection [pluck] retorna campos específicos de um resultado. Ex: Pessoa::all()->pluck('nome') - retornará uma lista só com os nomes das pessoas.
 - Existem muitos métodos úteis na classe Collection, consultar documentação para sabe mais, guia <Digging Deeper - Collections>
-- Para editar e atualizar registros, podemos utilizar o método <save> de uma instância ou o método <fill> e <update>. Ex: Pessoa::fill('nome', 'nome editado')->update()
+- Para editar e atualizar registros, podemos utilizar o método <save> de uma instância ou o método <fill> e <save>. Ex: Pessoa::fill(['nome', 'nome editado'])->save()
+- Também podemos atualizar registros usando os métodos <where> e <update>. Ex: Pessoa::whereIn('id', [1,2,3])->update(['nome' => 'nome editado'])
 - Para excluir registros, podemos usar o método <delete> de uma instância ou o método <destroy> da classe. Ex: Pessoa::destroy(1)
+- Para exclusão lógica, usamos o conceito de SoftDeletes e para recuperamos em alguma consulta os registros removidos logicamente, utilizamos <withTrashed>, Ex: Pessoa:withTrashed()->get()
+- Para recuperar somente os registros removidos logicamente, usamos o método <onlyTrashed>. Ex: Pessoa::onlyTrashed()
+- Para restaurar um registro removido logiamente, usamos o comando <restore> na instância do objeto 
 
 ## Trabalhando com migrations
 - [Criar migração] php artisan make:migration **nome_da_migracao**
@@ -31,6 +35,11 @@
 - [Refresh] efetua rollback em todas as migrações e depois executa migrate para criar novamente
 - [Fresh] dropa todas as tabelas no banco e depois executa migrate recriando tudo novamente
 
+### Seeders
+  - Para criar uma classe de seed, executar o comando [php artisan make:seeder FornecedorSeeder]
+  - Podemos utilizar comando de criaçãod e registros utilizando os métodos <save>, <create> ou até mesmo usando o método <insert> da classe <DB>
+  - Para popular as tabelas no banco de dados com o seed criado, executar o comando [php artisan db:seed]
+  - Para popular utilizando um seeder específico, executar o comando [php artisan db:seed --class=NomeDaClasseSeeder]
 
 <p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
 
