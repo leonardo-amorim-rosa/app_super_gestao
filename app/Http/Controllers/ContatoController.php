@@ -53,13 +53,14 @@ class ContatoController extends Controller
     {
         // validando os campos do formulário
         $request->validate([
-            'nome' => 'required|min:3|max:40',
+            'nome' => 'required|min:3|max:40|unique:site_contatos',
             'telefone' => 'required',
-            'email' => 'required',
-            'motivo_contato' => 'required',
-            'mensagem' => 'required'
+            'email' => 'email',
+            'motivo_contatos_id' => 'required',
+            'mensagem' => 'required|max:2000'
         ]);
 
-        //SiteContato::create($request->all()); // mais uma forma de salvar um registro no banco
+        SiteContato::create($request->all()); // mais uma forma de salvar um registro no banco
+        return redirect()->route('site.index');
     }
 }
