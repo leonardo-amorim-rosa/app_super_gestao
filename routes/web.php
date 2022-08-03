@@ -24,7 +24,7 @@ Route::get('/contato', 'ContatoController@contato')->name('site.contato');
 Route::post('/contato', 'ContatoController@salvar')->name('site.contato');
 Route::get('/login', function() { return 'Login';})->name('site.login');
 
-Route::prefix('app')->group(function() { // agrupando rotas
+Route::middleware('autenticacao:padrao')->prefix('app')->group(function() { // agrupando rotas
     Route::get('/cliente', function() { return 'Cliente';})->name('app.cliente');
     Route::get('/fornecedor', 'FornecedorController@index')->name('app.fornecedor');
     Route::get('/produto', function() { return 'Produto';})->name('app.produto');    
