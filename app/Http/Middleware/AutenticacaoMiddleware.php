@@ -16,12 +16,19 @@ class AutenticacaoMiddleware
      */
     public function handle($request, Closure $next, $metodo_autenticacao)
     {
-        if ($metodo_autenticacao == "padrao")
-        {
-            echo "Verifique o usuário e senha no banco de dados.";
+        session_start();
+        if (isset($_SESSION['email']) && $_SESSION['email'] != '') {
+            return $next($request);
+        } else {
+            return redirect()->route('site.login', ['erro' => 2]);
         }
 
-        // return $next($request);
-        return Response('Acesso a rota negado!');
+        // if ($metodo_autenticacao == "padrao")
+        // {
+        //     echo "Verifique o usuário e senha no banco de dados.";
+        // }
+
+        // // return $next($request);
+        // return Response('Acesso a rota negado!');
     }
 }
